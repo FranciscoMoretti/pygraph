@@ -38,6 +38,7 @@ def convert_graph_directed_to_undirected(dg):
     udg.edges = copy.deepcopy(dg.edges)
     udg.next_node_id = dg.next_node_id
     udg.next_edge_id = dg.next_edge_id
+    udg.num_nodes = dg.num_nodes
 
     # Convert the directed edges into undirected edges
     for edge_id in udg.get_all_edge_ids():
@@ -45,6 +46,7 @@ def convert_graph_directed_to_undirected(dg):
         target_node_id = edge['vertices'][1]
         target_node = udg.get_node(target_node_id)
         target_node['edges'].append(edge_id)
+    udg.num_edges = len(udg.get_all_edge_ids())
 
     return udg
 
