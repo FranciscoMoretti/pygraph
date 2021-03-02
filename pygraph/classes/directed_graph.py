@@ -185,7 +185,7 @@ class DirectedGraph(object):
         node = self.get_node(node_id)
 
         # Remove all edges from the node
-        for e in node['edges']:
+        for e in node['edges'][:]:
             self.delete_edge_by_id(e)
 
         # Remove all edges to the node
