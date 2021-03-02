@@ -3,3 +3,5 @@
 /build
 /PyGraph.egg-info
 /dist
+venv
+.vscode
