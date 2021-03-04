@@ -40,9 +40,27 @@ def convert_graph_directed_to_undirected(dg):
     udg.next_edge_id = dg.next_edge_id
     udg.num_nodes = dg.num_nodes
 
+    # using naive method 
+    # to remove duplicated  
+    # from list  
+    udg.edges = {} 
+    udg_edges_vertices_sorted = []
+    for e_id, e_value in digraph_edges.items(): 
+        if sorted(e_value['vertices']) not in udg_edges_vertices_sorted:
+            udg_edges_vertices_sorted.append(sorted(e_value['vertices']))
+            udg.edges[e_id] = e_value 
+
+    # Clear old edge ids from nodes
+    for n_id, n_val in udg.nodes.items():
+        n_val['edges'] = []
+        udg.nodes[n_id] = n_val
+
     # Convert the directed edges into undirected edges
     for edge_id in udg.get_all_edge_ids():
         edge = udg.get_edge(edge_id)
+        source_node_id = edge['vertices'][0]
+        source_node = udg.get_node(source_node_id)
+        source_node['edges'].append(edge_id)
         target_node_id = edge['vertices'][1]
         target_node = udg.get_node(target_node_id)
         target_node['edges'].append(edge_id)
