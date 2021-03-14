@@ -45,7 +45,7 @@ def convert_graph_directed_to_undirected(dg):
     # from list  
     udg.edges = {} 
     udg_edges_vertices_sorted = []
-    for e_id, e_value in digraph_edges.items(): 
+    for e_id, e_value in dg.edges.items(): 
         if sorted(e_value['vertices']) not in udg_edges_vertices_sorted:
             udg_edges_vertices_sorted.append(sorted(e_value['vertices']))
             udg.edges[e_id] = e_value 
